@@ -13,9 +13,17 @@
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
+        "postcss": "^8.1.14",
+        "resolve-url-loader": "^5.0.0",
+        "sass": "^1.86.0",
+        "sass-loader": "^12.1.0"
     },
     "dependencies": {
+        "@fullcalendar/core": "^6.1.4",
+        "@fullcalendar/daygrid": "^6.1.4",
+        "@fullcalendar/interaction": "^6.1.4",
+        "@fullcalendar/list": "^6.1.4",
+        "@fullcalendar/timegrid": "^6.1.4",
         "jquery": "^3.6.3"
     }
 }
