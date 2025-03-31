@@ -1,23 +1,33 @@
-@extends('layouts.app')
-@section('content')
 <div id="calendar"></div>
+
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar(calendarEl, {
-      plugins: [ dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin ],
-        initialView: 'dayGridMonth',
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title'
-        },
-        slotDuration: '00:10:00',
-        defaultDate: '2023-02-22',
-        editable: true,
-        events: [ { title: 'All Day Event', start: '2023-02-20' },
-                   { title: 'Long Event', start: '2023-02-22', end: '2023-02-23' } ]
-      });
-     calendar.render();
-  });
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: ['dayGrid', 'timeGrid', 'list', 'interaction'],
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+            },
+            slotDuration: '00:10:00',
+            defaultDate: '2017-01-01',
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            events: '{ route('calendar.json') }',
+            dateClick: function(info) {
+                $('#starttime').val(info.date.toISOString().substring(11,16));
+                $('#bookingDate').val(info.date.toISOString().substring(0,10));
+                $('#fullCalModal').modal('show');
+            }
+        });
+        calendar.render();
+    });
+
+    $(function () {
+    $('body').on('click', '#submitButton', function (e) {
+        $(this.form).submit();
+        $('#fullCalModal').modal('hide');
+    });
+});
 </script>
-@endsection
